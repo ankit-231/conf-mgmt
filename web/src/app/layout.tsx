@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import QueryProvider from "@/providers/query-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -27,11 +28,23 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={cn("font-sans", figtree.variable)}>
+        // See https://ui.shadcn.com/docs/dark-mode/next#wrap-your-root-layout for why we need to use `suppressHydrationWarning` here
+        <html
+            lang="en"
+            className={cn("font-sans", figtree.variable)}
+            suppressHydrationWarning
+        >
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <QueryProvider>{children}</QueryProvider>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="light"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <QueryProvider>{children}</QueryProvider>
+                </ThemeProvider>
             </body>
         </html>
     );

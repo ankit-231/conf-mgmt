@@ -46,6 +46,11 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Fixed print/export color for the board members poster — intentionally
+     not tied to --primary, since the poster is a static print artifact and
+     must not shift with the app's light/dark theme. */
+  --color-brand-maroon: #7a1a3a;
 }
 
 :root {

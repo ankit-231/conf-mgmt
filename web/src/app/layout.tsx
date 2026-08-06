@@ -6,6 +6,7 @@ import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TouchProvider } from "@/components/ui/hybrid-tooltip";
 import ProgressProvider from "@/providers/progress-provider";
+import { Toaster } from "@/components/ui/toast";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -50,6 +51,7 @@ export default function RootLayout({
                             <TouchProvider>{children}</TouchProvider>
                         </ProgressProvider>
                     </QueryProvider>
+                    <Toaster />
                 </ThemeProvider>
             </body>
         </html>

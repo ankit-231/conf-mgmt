@@ -18,17 +18,8 @@ import {
     TooltipProvider,
 } from "./tooltip";
 import { Popover, PopoverTrigger, PopoverContent } from "./popover";
-import {
-    TooltipContentProps,
-    TooltipProps,
-    TooltipProviderProps,
-    TooltipTriggerProps,
-} from "@radix-ui/react-tooltip";
-import {
-    PopoverContentProps,
-    PopoverProps,
-    PopoverTriggerProps,
-} from "@radix-ui/react-popover";
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 
 const TouchContext = createContext<boolean | undefined>(undefined);
 const useTouch = () => useContext(TouchContext);
@@ -43,18 +34,20 @@ const TouchProvider = (props: PropsWithChildren) => {
     return <TouchContext.Provider value={isTouch} {...props} />;
 };
 
-const HybridTooltipProvider = (props: TooltipProviderProps) => {
-    return <TooltipProvider delayDuration={0} {...props} />;
+const HybridTooltipProvider = (props: TooltipPrimitive.Provider.Props) => {
+    return <TooltipProvider delay={0} {...props} />;
 };
 
-const HybridTooltip = (props: TooltipProps & PopoverProps) => {
+const HybridTooltip = (
+    props: TooltipPrimitive.Root.Props & PopoverPrimitive.Root.Props,
+) => {
     const isTouch = useTouch();
 
     return isTouch ? <Popover {...props} /> : <Tooltip {...props} />;
 };
 
 const HybridTooltipTrigger = (
-    props: TooltipTriggerProps & PopoverTriggerProps
+    props: TooltipPrimitive.Trigger.Props & PopoverPrimitive.Trigger.Props,
 ) => {
     const isTouch = useTouch();
 
@@ -66,7 +59,7 @@ const HybridTooltipTrigger = (
 };
 
 const HybridTooltipContent = (
-    props: TooltipContentProps & PopoverContentProps
+    props: TooltipPrimitive.Popup.Props & PopoverPrimitive.Popup.Props,
 ) => {
     const isTouch = useTouch();
 

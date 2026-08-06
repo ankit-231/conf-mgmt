@@ -36,12 +36,12 @@ const members: Member[] = [
 function BoardMembersPoster() {
   return (
     <div
-      className="mx-auto w-[800px] px-6 pt-7 pb-9 font-sans"
+      className="mx-auto w-full max-w-[800px] px-4 pt-5 pb-7 font-sans sm:px-6 sm:pt-7 sm:pb-9"
       style={{ background: "linear-gradient(180deg, #f2e6e8 0%, #eee0e3 100%)" }}
     >
-      <div className="rounded-md bg-white px-[26px] pt-[22px] pb-8 shadow-[0_2px_20px_rgba(90,20,40,0.08)]">
-        <div className="mb-[18px] text-center">
-          <div className="text-[26px] font-extrabold tracking-[1.5px] text-brand-maroon">
+      <div className="rounded-md bg-white px-4 pt-4 pb-6 shadow-[0_2px_20px_rgba(90,20,40,0.08)] sm:px-[26px] sm:pt-[22px] sm:pb-8">
+        <div className="mb-3 text-center sm:mb-[18px]">
+          <div className="text-lg font-extrabold tracking-[1px] text-brand-maroon sm:text-[26px] sm:tracking-[1.5px]">
             ROTARACT CLUB OF KATHMANDU METROPOLIS
           </div>
         </div>
@@ -51,17 +51,17 @@ function BoardMembersPoster() {
           alt="Rotaract and partner logos"
           width={800}
           height={100}
-          className="mb-[22px] block h-auto w-full object-contain"
+          className="mb-4 block h-auto w-full object-contain sm:mb-[22px]"
         />
 
-        <div className="mb-8 text-center">
-          <span className="inline-block rounded-[22px] bg-brand-maroon px-[26px] py-[9px] text-[16px] font-extrabold tracking-[0.8px] text-white">
+        <div className="mb-5 text-center sm:mb-8">
+          <span className="inline-block rounded-[22px] bg-brand-maroon px-4 py-2 text-xs font-extrabold tracking-[0.5px] text-white sm:px-[26px] sm:py-[9px] sm:text-[16px] sm:tracking-[0.8px]">
             ROTA YEAR 2026/2027 BOARD MEMBERS
           </span>
         </div>
 
-        <div className="mb-[34px] flex flex-col items-center">
-          <div className="mb-2.5 size-[150px] overflow-hidden rounded-full border-[3px] border-brand-maroon">
+        <div className="mb-6 flex flex-col items-center sm:mb-[34px]">
+          <div className="mb-2 size-24 overflow-hidden rounded-full border-2 border-brand-maroon sm:mb-2.5 sm:size-[150px] sm:border-[3px]">
             <Image
               src={president.photo}
               alt={president.name}
@@ -70,16 +70,16 @@ function BoardMembersPoster() {
               className="size-full object-cover object-[center_top]"
             />
           </div>
-          <div className="text-[15px] font-extrabold tracking-[0.3px] text-brand-maroon">
+          <div className="text-sm font-extrabold tracking-[0.2px] text-brand-maroon sm:text-[15px] sm:tracking-[0.3px]">
             {president.role}
           </div>
-          <div className="text-[15px] text-[#2a2a2a]">{president.name}</div>
+          <div className="text-sm text-[#2a2a2a] sm:text-[15px]">{president.name}</div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-x-9 gap-y-[26px]">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-4 sm:gap-x-9 sm:gap-y-[26px]">
           {members.map((member) => (
-            <div key={member.name} className="flex w-[130px] flex-col items-center">
-              <div className="mb-[9px] size-[88px] overflow-hidden rounded-full">
+            <div key={member.name} className="flex w-24 flex-col items-center sm:w-[130px]">
+              <div className="mb-1.5 size-16 overflow-hidden rounded-full sm:mb-[9px] sm:size-[88px]">
                 <Image
                   src={member.photo}
                   alt={member.name}
@@ -88,10 +88,10 @@ function BoardMembersPoster() {
                   className="size-full object-cover object-[center_top]"
                 />
               </div>
-              <div className="text-center text-[13px] leading-[1.3] font-extrabold text-brand-maroon">
+              <div className="text-center text-[11px] leading-[1.3] font-extrabold text-brand-maroon sm:text-[13px]">
                 {member.role}
               </div>
-              <div className="text-center text-[13px] text-[#2a2a2a]">{member.name}</div>
+              <div className="text-center text-[11px] text-[#2a2a2a] sm:text-[13px]">{member.name}</div>
             </div>
           ))}
         </div>

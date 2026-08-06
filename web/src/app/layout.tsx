@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TouchProvider } from "@/components/ui/hybrid-tooltip";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -43,7 +44,9 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <QueryProvider>{children}</QueryProvider>
+                    <QueryProvider>
+                        <TouchProvider>{children}</TouchProvider>
+                    </QueryProvider>
                 </ThemeProvider>
             </body>
         </html>

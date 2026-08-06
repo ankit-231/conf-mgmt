@@ -2,33 +2,60 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import { isAxiosError } from "axios"
 
 import { Button } from "@/components/ui/button"
 import { Form, FormField } from "@/components/ui/form"
 import { FormInput } from "@/components/forms/form-input"
+import { useLogin } from "@/hooks/use-auth"
+import { setFormErrors } from "@/lib/utils"
+import { toastError } from "@/lib/toast"
 
 const loginSchema = z.object({
-  email: z.string().min(1, "Email is required").email("Enter a valid email address"),
+  username: z.string().min(1, "Username is required"),
   password: z.string().min(1, "Password is required"),
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
 function LoginForm() {
+  const router = useRouter()
+  const login = useLogin()
+
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   })
 
   function onSubmit(values: LoginFormValues) {
-    // TODO: wire up to auth backend
-    console.log("login submit", values)
+    login.mutate(values, {
+      onSuccess: () => {
+        router.push("/")
+      },
+      onError: (error) => {
+        const fieldErrors = isAxiosError(error)
+          ? error.response?.data?.extra?.fields
+          : undefined
+
+        if (fieldErrors) {
+          setFormErrors<LoginFormValues>(form.setError, fieldErrors)
+          return
+        }
+
+        const message = isAxiosError(error)
+          ? error.response?.data?.message
+          : undefined
+
+        toastError(message || "Invalid username or password.")
+      },
+    })
   }
 
   return (
@@ -36,9 +63,9 @@ function LoginForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="email"
+          name="username"
           render={({ field }) => (
-            <FormInput label="Email" type="email" placeholder="you@example.com" {...field} />
+            <FormInput label="Username" placeholder="you" {...field} />
           )}
         />
         <FormField
@@ -48,8 +75,8 @@ function LoginForm() {
             <FormInput label="Password" type="password" placeholder="••••••••" {...field} />
           )}
         />
-        <Button type="submit" className="w-full">
-          Log in
+        <Button type="submit" className="w-full" disabled={login.isPending}>
+          {login.isPending ? "Logging in..." : "Log in"}
         </Button>
         <p className="text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}

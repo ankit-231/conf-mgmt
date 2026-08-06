@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { FieldValues, Path, UseFormSetError } from "react-hook-form"
+import { toastError } from "@/lib/toast"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -11,8 +12,8 @@ function arrayOfStringToString(arr: string[]) {
 }
 
 // Maps DRF serializer field errors (ApiErrorResponse["extra"]["fields"]) onto
-// react-hook-form fields. non_field_errors has no matching field, so it goes
-// to "root" instead (rendered wherever the form shows its root error).
+// react-hook-form fields. non_field_errors has no matching field, so it's
+// toasted instead.
 export function setFormErrors<T extends FieldValues>(
   setError: UseFormSetError<T>,
   fields: Record<string, string[]>,
@@ -28,9 +29,12 @@ export function setFormErrors<T extends FieldValues>(
       return
     }
 
-    const targetField = fieldName === "non_field_errors" ? "root" : fieldName
+    if (fieldName === "non_field_errors") {
+      toastError(arrayOfStringToString(fieldErrors))
+      return
+    }
 
-    setError(targetField as Path<T>, {
+    setError(fieldName as Path<T>, {
       type: "manual",
       message: arrayOfStringToString(fieldErrors),
     })

@@ -1,0 +1,104 @@
+# History / local tools
+.history
+
+
+# IDEs / Editors
+**/.vscode/*
+!**/.vscode/settings.example.json*
+.idea/
+*.swp
+*.swo
+
+
+# Python bytecode / build artifacts
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+**/venv/
+**/.venv/
+
+
+# Django
+
+# IMPORTANT: do NOT ignore static source files
+# (only ignore collected static output)
+
+# collected static files (production output only)
+staticfiles/
+collected_static/
+**/staticfiles/
+**/collected_static/
+
+# migrations MUST NOT be ignored (so nothing here)
+
+
+# Media files (user uploads)
+media/
+mediafiles/
+files/
+pdfs/
+export_data/
+
+
+# Environment variables
+.env
+.env.*
+!.env.example
+.env.prod
+
+
+# Logs
+*.log
+log/
+logs/
+
+
+# Database files
+*.sqlite3
+*.db
+# db1.sqlite3
+
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+
+# Type checking / linters
+.mypy_cache/
+.ruff_cache/
+
+
+# FastAPI / Uvicorn
+*.pid
+celerybeat.pid
+celerybeat-schedule*
+
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+# Docker
+docker-compose.override.yml

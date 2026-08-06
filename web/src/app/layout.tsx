@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TouchProvider } from "@/components/ui/hybrid-tooltip";
+import ProgressProvider from "@/providers/progress-provider";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -45,7 +46,9 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <QueryProvider>
-                        <TouchProvider>{children}</TouchProvider>
+                        <ProgressProvider>
+                            <TouchProvider>{children}</TouchProvider>
+                        </ProgressProvider>
                     </QueryProvider>
                 </ThemeProvider>
             </body>
